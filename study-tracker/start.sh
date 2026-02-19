@@ -11,7 +11,7 @@ echo "🚀 Starting Study Tracker..."
 echo "📍 Local Network IP: $LAN_IP"
 
 # --- Backend ---
-echo "  Starting Flask backend on 0.0.0.0:5001..."
+echo "  Starting Flask backend on 0.0.0.0:5005..."
 cd "$SCRIPT_DIR/backend"
 if [ -d "venv" ]; then
     source venv/bin/activate
@@ -22,18 +22,18 @@ echo $! > "$PID_DIR/backend.pid"
 echo "  ✓ Backend PID: $(cat "$PID_DIR/backend.pid")"
 
 # --- Frontend ---
-echo "  Starting Next.js frontend on 0.0.0.0:3000..."
+echo "  Starting Next.js frontend on 0.0.0.0:3005..."
 cd "$SCRIPT_DIR/frontend"
 # Pass API URL to build/runtime and bind to 0.0.0.0
-NEXT_PUBLIC_API_URL="http://$LAN_IP:5001" npm run dev -- -H 0.0.0.0 > /tmp/study-tracker-frontend.log 2>&1 &
+NEXT_PUBLIC_API_URL="http://$LAN_IP:5005" npm run dev -- -H 0.0.0.0 -p 3005 > /tmp/study-tracker-frontend.log 2>&1 &
 echo $! > "$PID_DIR/frontend.pid"
 echo "  ✓ Frontend PID: $(cat "$PID_DIR/frontend.pid")"
 
 sleep 3
 echo ""
 echo "✅ Study Tracker is running!"
-echo "   Localhost:  http://localhost:3000"
-echo "   Network:    http://$LAN_IP:3000  (use this on iPhone)"
+echo "   Localhost:  http://localhost:3005"
+echo "   Network:    http://$LAN_IP:3005  (use this on iPhone)"
 echo ""
 echo "Logs:"
 echo "   Backend:  /tmp/study-tracker-backend.log"

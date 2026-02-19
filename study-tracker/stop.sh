@@ -28,8 +28,8 @@ stop_process "backend"
 stop_process "frontend"
 
 # Kill any leftover processes on the ports just in case
-lsof -ti :5001 | xargs kill -9 2>/dev/null
-lsof -ti :3000 | xargs kill -9 2>/dev/null
+lsof -ti :5005 | xargs kill -9 2>/dev/null
+lsof -ti :3005 | xargs kill -9 2>/dev/null
 
 echo ""
 echo "✅ Study Tracker stopped."
